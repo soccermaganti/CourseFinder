@@ -4,3 +4,6 @@ This project aims to develop a filtering system for course modules, addressing t
 
 
 - Currently only works for specific course lists (could integrate an AI API for this?)
+
+# Challenges/Problems I researched solutions for
+
