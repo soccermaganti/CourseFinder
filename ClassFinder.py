@@ -23,7 +23,6 @@ def checker(url):
 
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, 'html.parser')
-    # soup = BeautifulSoup(content, "html.parser")
 
     #https://stackoverflow.com/questions/26704309/python-how-to-scrape-tr-td-table-data-using-requests-beautifulsoup
     texts = soup.find_all('td')
@@ -55,6 +54,7 @@ def checker(url):
 
 
 def traversal(url):
+   
     # https://scrapfly.io/blog/scraping-using-browsers/
     # The course module website is dynamically loading meaning that I can't scrape the basic HTML as it is empty.
     # Needed a tool that can scrape dynamic pages => Selenium is a great tool for this (Opens a web browser like a regular user would)
@@ -100,9 +100,9 @@ def traversal(url):
 if __name__ == "__main__":
     start = time.time()
 
-    base_url = "https://www.kent.ac.uk/courses/modules"
+    # Add the URL for the course list here
+    base_url = ""
     traversal(base_url)
-    # checker("https://www.kent.ac.uk/courses/modules/module/COMP8740")
 
     end = time.time()
     print(end-start)
