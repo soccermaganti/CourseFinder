@@ -5,6 +5,12 @@ This project aims to develop a filtering system for course modules, addressing t
 
 - Currently only works for specific course lists (could integrate an AI API for this?)
 
+# Technologies Used
+1) Beautifulsoup4
+2) Selenium
+3) Python
+4) HTML
+
 # Challenges/Problems I researched solutions for
 
 1) **Connecting to Module Web Server**
