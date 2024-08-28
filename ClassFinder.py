@@ -23,6 +23,7 @@ def checker(url):
 
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, 'html.parser')
+    # soup = BeautifulSoup(content, "html.parser")
 
     #https://stackoverflow.com/questions/26704309/python-how-to-scrape-tr-td-table-data-using-requests-beautifulsoup
     texts = soup.find_all('td')
@@ -30,6 +31,7 @@ def checker(url):
     with open('results.txt', 'at', encoding='utf8') as file:
         locationBool = False
         seasonBool = False
+        creditBool = False
         for text in texts:
             text = text.get_text().strip()
             # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text
@@ -39,8 +41,11 @@ def checker(url):
                 locationBool = True
             if text is not None and "Autumn Term" in text:
                 seasonBool = True
-        # print([locationBool, seasonBool])
-        if locationBool and seasonBool:
+            if text is not None and re.search(r'\b5\b', text):
+                creditBool = True
+                # print(text)
+        # print([locationBool, seasonBool, creditBool])
+        if locationBool and seasonBool and creditBool:
             classTitle = soup.find('h1').get_text()
             file.write("Class name: " + classTitle + ". The URL to this is: " + url + '\n')
 
@@ -50,7 +55,6 @@ def checker(url):
    except Exception as e:
         print(f'Error: {e}')
         return
-   
 
 
 def traversal(url):
