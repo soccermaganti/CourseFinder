@@ -23,4 +23,17 @@ This project aims to develop a filtering system for course modules, addressing t
    - After fixing the network connection error, I successfully scraped the HTML from the page. However I quickly realized that not all the page elements were being saved and when I printed out the HTML, it was very small and didn't contain everything.
    - I then researched what was going on and realized it was due to HTML being dynamically loaded JavaScript in the backend. From here I knew I had to somehow simulate having all the HTML be loaded.
    - I found a python tool called **Selenium** that was a solution to my problem. I learned that Selenium simulates running a webpage and after a certain timeout period, it will bring the response content. After trying this, all the HTML elements were able to be scraped from the Course Module Page since all the elements loaded into my data structure.
+   - Solution
+     ```python
+      browser = webdriver.Chrome()
+      browser.get(url) 
+
+      title = (
+        WebDriverWait(driver=browser, timeout=5)
+        .until(visibility_of_element_located((By.CSS_SELECTOR, "h2")))
+        .text
+      )
+      content = browser.page_source
+      soup = BeautifulSoup(content, "html.parser")
+     ```
 
