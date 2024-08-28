@@ -43,3 +43,11 @@ This project aims to develop a filtering system for course modules, addressing t
       soup = BeautifulSoup(content, "html.parser")
      ```
 
+3) **Lazy Loading Causing HTML to not fully load**
+   - Not all the objects were being picked up in the scraper due to this feature
+        - Lazy loading means waiting to render content on a webpage until the user or the browser needs it. Lazy loading can help speed up webpage load times. Performance for Developers.
+        - Simulates a user scrolling
+     ```python
+        browser.execute_script("window.scrollBy(0, window.innerHeight);")
+     ```
+
