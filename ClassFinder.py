@@ -31,7 +31,7 @@ def checker(url):
     with open('results.txt', 'at', encoding='utf8') as file:
         locationBool = False
         seasonBool = False
-        creditBool = False
+        # creditBool = False
         for text in texts:
             text = text.get_text().strip()
             # https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text
@@ -41,11 +41,11 @@ def checker(url):
                 locationBool = True
             if text is not None and "Autumn Term" in text:
                 seasonBool = True
-            if text is not None and re.search(r'\b5\b', text):
-                creditBool = True
-                # print(text)
+            # if text is not None and re.search(r'\b5\b', text):
+            #     creditBool = True
+            #     # print(text)
         # print([locationBool, seasonBool, creditBool])
-        if locationBool and seasonBool and creditBool:
+        if locationBool and seasonBool:
             classTitle = soup.find('h1').get_text()
             file.write("Class name: " + classTitle + ". The URL to this is: " + url + '\n')
 
@@ -55,7 +55,7 @@ def checker(url):
    except Exception as e:
         print(f'Error: {e}')
         return
-
+   
 
 def traversal(url):
    
@@ -63,8 +63,8 @@ def traversal(url):
     # The course module website is dynamically loading meaning that I can't scrape the basic HTML as it is empty.
     # Needed a tool that can scrape dynamic pages => Selenium is a great tool for this (Opens a web browser like a regular user would)
     browser = webdriver.Chrome()
-    browser.get(url) 
-
+    browser.get(url)
+    browser.execute_script("window.scrollBy(0, window.innerHeight);")
     title = (
         WebDriverWait(driver=browser, timeout=5)
         .until(visibility_of_element_located((By.CSS_SELECTOR, "h2")))
